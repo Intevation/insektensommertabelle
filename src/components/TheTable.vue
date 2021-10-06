@@ -241,6 +241,7 @@ export default {
           return jcsv.toObjects(raw)
         })
         .then(data => {
+          data = this.filterDuplicates(data);
           this.beobachtungen = data;
           this.tableData = this.top(this.beobachtungen, 100);
           this.footer.beobachtungen = this.beobachtungen.length;
@@ -253,8 +254,20 @@ export default {
         }) // eslint-disable-next-line
         .catch(err => console.log(err));
     },
+    filterDuplicates(data) {
+      const uniques = [];
+      data.forEach((item) => {
+        let u = {...item };
+        u.guid = null;
+        u = JSON.stringify(u);
+        if (!uniques.find(un => un === u)){
+          uniques.push(u)
+        }
+      });
+      return uniques.map(JSON.parse)
+    },
     anzahlMeldungen(beobachtungen) {
-      let latlon = [];
+      const latlon = [];
       beobachtungen.forEach(function(beobachtung) {
         if (beobachtung.kopfid !== "") {
           latlon.push(beobachtung.kopfid);
@@ -266,9 +279,7 @@ export default {
         .reverse()
         .filter(function(value, index, array) {
           return array.indexOf(value, index + 1) === -1;
-        })
-        .reverse()
-        .map(JSON.parse);
+        });
       return meldungen.length;
     },
     // //helper for creating comparison data for chart
@@ -284,17 +295,21 @@ export default {
       const uniqueMap = new Map();
       beobachtungen.forEach(beobachtung => {
         const entry = uniqueMap.get(beobachtung.artname);
+        let anzahl = Number.parseInt(beobachtung.anzahl);
+        if (anzahl <= 0) {
+          anzahl = 1;
+        }
         if (!entry) {
           uniqueMap.set(beobachtung.artname, {
             artname: beobachtung.artname,
             taxon: beobachtung.taxon,
             gattung: beobachtung.gattung,
-            anzahl: Number.parseInt(beobachtung.anzahl),
+            anzahl: anzahl,
             beobachtungen: 1
           });
         } else {
           ++entry.beobachtungen;
-          entry.anzahl += Number.parseInt(beobachtung.anzahl);
+          entry.anzahl += anzahl;
         }
       });
       // Create list
