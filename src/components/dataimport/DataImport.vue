@@ -48,6 +48,10 @@ import juni2023_top100 from "./seasons/juni2023_top100";
 import juni2023_top5Lebensraeume from "./seasons/juni2023_top5Lebensraeume";
 import juni2023_top100Bundeslaender from "./seasons/juni2023_top100Bundeslaender";
 
+import august2024_top100 from "./seasons/august2024_top100";
+import august2024_top5Lebensraeume from "./seasons/august2024_top5Lebensraeume";
+import august2024_top100Bundeslaender from "./seasons/august2024_top100Bundeslaender";
+
 import juni2024_top100 from "./seasons/juni2024_top100";
 import juni2024_top5Lebensraeume from "./seasons/juni2024_top5Lebensraeume";
 import juni2024_top100Bundeslaender from "./seasons/juni2024_top100Bundeslaender";
@@ -67,6 +71,7 @@ export const ImportList = {
         juni2022_top100,
         august2023_top100,
         juni2023_top100,
+        august2024_top100,
         juni2024_top100,
     ],
     top5Lebensraeume: [
@@ -82,6 +87,7 @@ export const ImportList = {
         juni2022_top5Lebensraeume,
         august2023_top5Lebensraeume,
         juni2023_top5Lebensraeume,
+        august2024_top5Lebensraeume,
         juni2024_top5Lebensraeume,
     ],
     top100Bundeslaender: [
@@ -97,6 +103,7 @@ export const ImportList = {
         juni2022_top100Bundeslaender,
         august2023_top100Bundeslaender,
         juni2023_top100Bundeslaender,
+        august2024_top100Bundeslaender,
         juni2024_top100Bundeslaender,
     ],
 };
